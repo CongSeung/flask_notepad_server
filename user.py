@@ -53,11 +53,11 @@ class UserRegisterResource(Resource):
 
             # 5-2. 쿼리문 만들기 (%s는 변수 처리해준다는 뜻) 
             query = '''insert into user
-                    (username, email, password)
+                    (nickname, email, password)
                     values
                     ( %s, %s, %s);'''
 
-            record = (data['username'], data['email'], hashed_password )
+            record = (data['nickname'], data['email'], hashed_password )
             
             # 5-3. 커서를 가져온다.
             cursor = connection.cursor()

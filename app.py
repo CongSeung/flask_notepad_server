@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_restful import Api
-from resource.notepad import NotepadResource
+from resource.notepad import  NotepadModifiedResource, NotepadaddResource
 from user import UserLoginResource, UserLogoutResource, UserRegisterResource, jwt_blacklist
 from config import Config
 
@@ -24,7 +24,9 @@ def check_if_token_is_revoked(jwt_header, jwt_payload):
 api = Api(app)
 
 # 경로와 리소스(API 코드)를 연결한다.
-api.add_resource(NotepadResource, '/notepad/<int:recipe_id>')
+
+api.add_resource(NotepadaddResource, '/notepad')
+api.add_resource(NotepadModifiedResource, '/notepad/<int:memo_id>')
 api.add_resource(UserRegisterResource, '/users/register')
 api.add_resource(UserLoginResource, '/users/login')
 api.add_resource(UserLogoutResource, '/users/logout')
