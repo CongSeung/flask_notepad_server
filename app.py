@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_restful import Api
+from follow import FollowFriends
 from resource.notepad import  NotepadModifiedResource, NotepadaddResource
 from user import UserLoginResource, UserLogoutResource, UserRegisterResource, jwt_blacklist
 from config import Config
@@ -30,6 +31,7 @@ api.add_resource(NotepadModifiedResource, '/notepad/<int:memo_id>')
 api.add_resource(UserRegisterResource, '/users/register')
 api.add_resource(UserLoginResource, '/users/login')
 api.add_resource(UserLogoutResource, '/users/logout')
+api.add_resource(FollowFriends, '/follow/<int:f_user_id>')
 
 if __name__=="__main__" :
     app.run()
