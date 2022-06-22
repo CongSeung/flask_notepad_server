@@ -1,9 +1,10 @@
 import datetime
 from http import HTTPStatus
+from os import access
 from flask import request
 from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, jwt_required
 from flask_restful import Resource
-from mysql.connector.errors import Error   
+from mysql.connector.errors import Error
 from mysql_connection import get_connection
 import mysql.connector
 
@@ -28,7 +29,7 @@ class MemoListResource(Resource) :
             connection = get_connection()
 
             # 2. 쿼리문 만들기
-            query = '''insert into notepad
+            query = '''insert into memo
                     (title, date, content, user_id)
                     values
                     (%s , %s , %s, %s);'''
@@ -74,7 +75,7 @@ class MemoListResource(Resource) :
             connection = get_connection()
 
             query = '''select *
-                    from notepad
+                    from memo
                     where user_id = %s
                     limit '''+offset+''' , '''+limit+''';'''
             
@@ -137,7 +138,7 @@ class MemoInfoResource(Resource) :
             connection = get_connection()
 
             # 2. 쿼리문 만들기
-            query = '''update notepad
+            query = '''update memo
                         set title = %s, 
                         date = %s,
                         content = %s
@@ -183,7 +184,7 @@ class MemoInfoResource(Resource) :
             connection = get_connection()
 
             # 2. 쿼리문 만들기
-            query = '''delete from notepad
+            query = '''delete from memo
                         where id = %s and user_id = %s;'''
             
             record = ( memo_id, user_id )

@@ -1,14 +1,14 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_restful import Api
-from follow import FollowFriends
-from resource.notepad import  NotepadModifiedResource, NotepadaddResource
+from follow import FollowListResource, FollowResource
+from resource.notepad import  MemoInfoResource, MemoListResource  #, NotepadModifiedResource, NotepadaddResource
 from user import UserLoginResource, UserLogoutResource, UserRegisterResource, jwt_blacklist
 from config import Config
 
 app = Flask(__name__)
 
-
+   
 # 환경변수 셋팅
 app.config.from_object(Config)
 
@@ -26,12 +26,13 @@ api = Api(app)
 
 # 경로와 리소스(API 코드)를 연결한다.
 
-api.add_resource(NotepadaddResource, '/notepad')
-api.add_resource(NotepadModifiedResource, '/notepad/<int:memo_id>')
+api.add_resource(MemoListResource, '/notepad')
+api.add_resource(MemoInfoResource, '/notepad/<int:memo_id>')
 api.add_resource(UserRegisterResource, '/users/register')
 api.add_resource(UserLoginResource, '/users/login')
 api.add_resource(UserLogoutResource, '/users/logout')
-api.add_resource(FollowFriends, '/follow/<int:f_user_id>')
+api.add_resource(FollowResource, '/follow/<int:follow_id>')
+api.add_resource(FollowListResource, '/follow')
 
 if __name__=="__main__" :
     app.run()
