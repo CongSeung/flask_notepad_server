@@ -115,7 +115,7 @@ class FollowListResource(Resource) :
                     join follow f
                     on m.user_id = f.followee_id and follower_id = %s
                     join user u
-                    on m.user_id = u.id
+                    on m.user_id = u.id;
                     limit '''+offset+''' , '''+limit+''';'''
             
             record = (user_id,)

@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_restful import Api
-from follow import FollowListResource, FollowResource
-from resource.notepad import  MemoInfoResource, MemoListResource  #, NotepadModifiedResource, NotepadaddResource
+from resources.follow import FollowListResource, FollowResource
+from resources.notepad import  MemoInfoResource, MemoListResource  #, NotepadModifiedResource, NotepadaddResource
 from user import UserLoginResource, UserLogoutResource, UserRegisterResource, jwt_blacklist
 from config import Config
 
